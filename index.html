@@ -395,7 +395,7 @@ async function loadToday() {
         </div>`;
     }).join('');
   } else {
-    const loc = d.locations[0];
+    const loc = d.locations.find(l => l.id === currentView) || d.locations[0];
     if (!loc) { container.innerHTML = ''; return; }
     const memPct = loc.today_cars ? Math.round(loc.member_count / loc.today_cars * 100) : 0;
     container.style.display = 'grid';
@@ -593,14 +593,17 @@ async function loadAlerts() {
 // ── TRANSACTIONS ──
 async function loadTransactions() {
   const d = SNAPSHOT_DATA.transactions;
+  const locName = currentView !== 'all' ? SNAPSHOT_DATA.today.locations.find(l => l.id === currentView)?.name : null;
+  const txns = locName ? d.transactions.filter(t => t.location === locName) : d.transactions;
   let html = '<table class="data-table"><thead><tr><th>Date</th><th>Time</th><th>Location</th><th>Package</th><th>Type</th><th>Payment</th><th>Amount</th></tr></thead><tbody>';
-  d.transactions.forEach(t => {
+  txns.forEach(t => {
     const amtColor = t.amount === 0 ? 'var(--text-dim)' : (t.amount < 0 ? 'var(--red)' : 'var(--green)');
     html += `<tr><td>${t.transaction_date}</td><td>${t.transaction_time?.substring(0,5)}</td><td>${t.location}</td>
       <td style="color:${WASH_COLORS[t.package]||'#fff'}">${t.package}</td>
       <td>${t.transaction_type}</td><td>${t.payment_method}</td>
       <td style="color:${amtColor};font-weight:600">$${t.amount.toFixed(2)}</td></tr>`;
   });
+  if (!txns.length) html += '<tr><td colspan="7" style="text-align:center;color:var(--text-dim)">No transactions for this location</td></tr>';
   html += '</tbody></table>';
   document.getElementById('tabTxn').innerHTML = html;
 }
@@ -609,7 +612,7 @@ async function loadTransactions() {
 async function loadMemberActivity() {
   const d = {activity:[]};
   let html = '<table class="data-table"><thead><tr><th>Date</th><th>Event</th><th>Member</th><th>Location</th><th>Package</th></tr></thead><tbody>';
-  d.events.forEach(e => {
+  (d.events || []).forEach(e => {
     const color = e.event_type === 'signup' ? 'var(--green)' : 'var(--red)';
     html += `<tr><td>${e.event_date}</td><td style="color:${color};font-weight:600">${e.event_type.toUpperCase()}</td>
       <td>${e.member_number}</td><td>${e.location}</td><td>${e.package || '—'}</td></tr>`;
