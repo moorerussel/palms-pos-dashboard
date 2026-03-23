@@ -363,8 +363,7 @@ async function loadAll() {
 
 // ── TODAY SUMMARY ──
 async function loadToday() {
-  const r = await fetch(`${API}/api/today?location_id=${currentView === 'all' ? 0 : currentView}`);
-  const d = await r.json();
+  const d = SNAPSHOT_DATA.today;
 
   document.getElementById('topTime').textContent = `Data: ${d.date}`;
   document.getElementById('topCars').textContent = fmtN(d.totals.today_cars);
@@ -424,8 +423,7 @@ async function loadToday() {
 
 // ── KPI ──
 async function loadKPI() {
-  const r = await fetch(`${API}/api/kpi?location_id=${currentView === 'all' ? 0 : currentView}`);
-  const d = await r.json();
+  const d = {this_month:{washes:44040,member_washes:18164,single_washes:25876,single_revenue:395085,mrr:179456.7,total_revenue:574541.7,avg_ticket_all:8.97,avg_ticket_paying:15.27,active_members:4930,visits_per_member:3.7,revenue_per_member:36.4},annual:{total_washes:529769,total_revenue:6837418.24,membership_pct:30.1}};
   const a = d.annual, m = d.this_month;
 
   document.getElementById('kpiTotalRev').textContent = fmt$(a.total_revenue);
@@ -443,8 +441,7 @@ async function loadKPI() {
 
 // ── REVENUE CHART ──
 async function loadRevenue() {
-  const r = await fetch(`${API}/api/revenue/daily?days=30&location_id=${currentView === 'all' ? 0 : currentView}`);
-  const d = await r.json();
+  const d = SNAPSHOT_DATA.revenue;
   const labels = d.dates.map(dt => { const p = dt.split('-'); return `${p[1]}/${p[2]}`; });
 
   if (currentView === 'all') {
@@ -471,8 +468,7 @@ async function loadRevenue() {
 
 // ── MEMBERSHIP ──
 async function loadMembership() {
-  const r = await fetch(`${API}/api/membership?location_id=${currentView === 'all' ? 0 : currentView}`);
-  const d = await r.json();
+  const d = SNAPSHOT_DATA.membership;
 
   let html = `
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
@@ -531,8 +527,7 @@ async function loadMembership() {
 
 // ── WASH MIX ──
 async function loadWashMix() {
-  const r = await fetch(`${API}/api/wash_mix?location_id=${currentView === 'all' ? 0 : currentView}`);
-  const d = await r.json();
+  const d = SNAPSHOT_DATA.wash_mix;
   const labels = Object.keys(d.counts);
   const data = Object.values(d.counts);
   const colors = labels.map(l => WASH_COLORS[l] || '#888');
@@ -541,8 +536,7 @@ async function loadWashMix() {
 
 // ── PAYMENT MIX ──
 async function loadPaymentMix() {
-  const r = await fetch(`${API}/api/payment_mix?location_id=${currentView === 'all' ? 0 : currentView}`);
-  const d = await r.json();
+  const d = SNAPSHOT_DATA.payment_mix;
   const labels = Object.keys(d.counts);
   const data = Object.values(d.counts);
   const colors = labels.map(l => PAY_COLORS[l] || '#888');
@@ -551,8 +545,7 @@ async function loadPaymentMix() {
 
 // ── HOURLY HEATMAP ──
 async function loadHourly() {
-  const r = await fetch(`${API}/api/hourly?location_id=${currentView === 'all' ? 0 : currentView}`);
-  const d = await r.json();
+  const d = SNAPSHOT_DATA.hourly;
   if (!d.locations.length) { document.getElementById('heatmapContainer').innerHTML = '<p>No data</p>'; return; }
 
   // Find max for heat scaling
@@ -580,8 +573,7 @@ async function loadHourly() {
 
 // ── ALERTS ──
 async function loadAlerts() {
-  const r = await fetch(`${API}/api/alerts?location_id=${currentView === 'all' ? 0 : currentView}`);
-  const d = await r.json();
+  const d = SNAPSHOT_DATA.alerts;
   let html = '';
 
   d.cash_alerts.forEach(a => {
@@ -600,8 +592,7 @@ async function loadAlerts() {
 
 // ── TRANSACTIONS ──
 async function loadTransactions() {
-  const r = await fetch(`${API}/api/transactions?limit=25&location_id=${currentView === 'all' ? 0 : currentView}`);
-  const d = await r.json();
+  const d = SNAPSHOT_DATA.transactions;
   let html = '<table class="data-table"><thead><tr><th>Date</th><th>Time</th><th>Location</th><th>Package</th><th>Type</th><th>Payment</th><th>Amount</th></tr></thead><tbody>';
   d.transactions.forEach(t => {
     const amtColor = t.amount === 0 ? 'var(--text-dim)' : (t.amount < 0 ? 'var(--red)' : 'var(--green)');
@@ -616,8 +607,7 @@ async function loadTransactions() {
 
 // ── MEMBERSHIP ACTIVITY ──
 async function loadMemberActivity() {
-  const r = await fetch(`${API}/api/membership/activity?limit=25&location_id=${currentView === 'all' ? 0 : currentView}`);
-  const d = await r.json();
+  const d = {activity:[]};
   let html = '<table class="data-table"><thead><tr><th>Date</th><th>Event</th><th>Member</th><th>Location</th><th>Package</th></tr></thead><tbody>';
   d.events.forEach(e => {
     const color = e.event_type === 'signup' ? 'var(--green)' : 'var(--red)';
@@ -630,8 +620,7 @@ async function loadMemberActivity() {
 
 // ── SHIFTS ──
 async function loadShifts() {
-  const r = await fetch(`${API}/api/shifts?location_id=${currentView === 'all' ? 0 : currentView}`);
-  const d = await r.json();
+  const d = {date:'2026-03-31', shifts:[]};
   let html = `<div style="font-size:12px;color:var(--text-dim);margin-bottom:8px;">Shifts for ${d.date}</div>`;
   html += '<table class="data-table"><thead><tr><th>Location</th><th>Employee</th><th>Role</th><th>Shift</th><th>Time</th></tr></thead><tbody>';
   d.shifts.forEach(s => {
