@@ -423,7 +423,7 @@ async function loadToday() {
 
 // ── KPI ──
 async function loadKPI() {
-  const d = {this_month:{washes:44040,member_washes:18164,single_washes:25876,single_revenue:395085,mrr:179456.7,total_revenue:574541.7,avg_ticket_all:8.97,avg_ticket_paying:15.27,active_members:4930,visits_per_member:3.7,revenue_per_member:36.4},annual:{total_washes:529769,total_revenue:6837418.24,membership_pct:30.1}};
+  const d = {annual:{total_revenue:6837418.24,total_washes:529769,membership_revenue:2057070.24,single_revenue:4758364,membership_pct:30.1},this_month:{washes:44040,member_washes:18164,single_washes:25876,single_revenue:395085,mrr:179456.7,total_revenue:574541.7,avg_ticket_all:8.97,avg_ticket_paying:15.27,active_members:4930,visits_per_member:3.7,revenue_per_member:36.4}};
   const a = d.annual, m = d.this_month;
 
   document.getElementById('kpiTotalRev').textContent = fmt$(a.total_revenue);
