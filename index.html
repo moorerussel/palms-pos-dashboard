@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+// Static snapshot data - baked in for preview
+const STATIC_MODE = true;
+const SNAPSHOT_DATA = {"today": {"date": "2026-03-31", "yesterday": "2026-03-30", "last_week": "2026-03-24", "locations": [{"id": 1, "name": "1711 E. Oltorf", "address": "1711 E. Oltorf St., Austin TX", "active_members": 1800, "redemption_rate": 0.53, "today_cars": 415, "today_revenue": 3027.0, "yesterday_cars": 384, "yesterday_revenue": 2796.0, "last_week_cars": 456, "trend_vs_yesterday": 8.1, "trend_vs_last_week": -9.0, "member_count": 218, "single_count": 197, "is_open": true}, {"id": 2, "name": "Brodie Lane", "address": "6811 Brodie Lane, Austin TX", "active_members": 1600, "redemption_rate": 0.25, "today_cars": 408, "today_revenue": 4739.0, "yesterday_cars": 382, "yesterday_revenue": 4431.0, "last_week_cars": 397, "trend_vs_yesterday": 6.8, "trend_vs_last_week": 2.8, "member_count": 100, "single_count": 308, "is_open": true}, {"id": 3, "name": "Highway 183", "address": "13691 N. Hwy 183, Austin TX", "active_members": 1200, "redemption_rate": 0.5, "today_cars": 272, "today_revenue": 2105.0, "yesterday_cars": 252, "yesterday_revenue": 1955.0, "last_week_cars": 242, "trend_vs_yesterday": 7.9, "trend_vs_last_week": 12.4, "member_count": 135, "single_count": 137, "is_open": true}, {"id": 4, "name": "Parmer Lane", "address": "2011 W. Parmer Lane, Austin TX", "active_members": 350, "redemption_rate": 0.35, "today_cars": 136, "today_revenue": 1368.0, "yesterday_cars": 111, "yesterday_revenue": 1096.0, "last_week_cars": 108, "trend_vs_yesterday": 22.5, "trend_vs_last_week": 25.9, "member_count": 46, "single_count": 90, "is_open": true}], "totals": {"today_cars": 1231, "today_revenue": 11239.0, "yesterday_cars": 1129, "yesterday_revenue": 10278.0, "last_week_cars": 1203, "last_week_revenue": 10876.0, "trend_vs_yesterday": 9.0, "trend_vs_last_week": 2.3}}, "revenue": {"dates": ["2026-03-02", "2026-03-03", "2026-03-04", "2026-03-05", "2026-03-06", "2026-03-07", "2026-03-08", "2026-03-09", "2026-03-10", "2026-03-11", "2026-03-12", "2026-03-13", "2026-03-14", "2026-03-15", "2026-03-16", "2026-03-17", "2026-03-18", "2026-03-19", "2026-03-20", "2026-03-21", "2026-03-22", "2026-03-23", "2026-03-24", "2026-03-25", "2026-03-26", "2026-03-27", "2026-03-28", "2026-03-29", "2026-03-30", "2026-03-31"], "locations": {"1": "1711 E. Oltorf", "2": "Brodie Lane", "3": "Highway 183", "4": "Parmer Lane"}, "data": {"2026-03-02": {"1": {"revenue": 3400.0, "count": 470}, "2": {"revenue": 4431.0, "count": 383}, "3": {"revenue": 2091.0, "count": 271}, "4": {"revenue": 1232.0, "count": 123}}, "2026-03-03": {"1": {"revenue": 3453.0, "count": 476}, "2": {"revenue": 4739.0, "count": 410}, "3": {"revenue": 2168.0, "count": 282}, "4": {"revenue": 1327.0, "count": 132}}, "2026-03-04": {"1": {"revenue": 3453.0, "count": 476}, "2": {"revenue": 4028.0, "count": 348}, "3": {"revenue": 1860.0, "count": 241}, "4": {"revenue": 1350.0, "count": 135}}, "2026-03-05": {"1": {"revenue": 3380.0, "count": 465}, "2": {"revenue": 4336.0, "count": 376}, "3": {"revenue": 2168.0, "count": 279}, "4": {"revenue": 1327.0, "count": 133}}, "2026-03-06": {"1": {"revenue": 3104.0, "count": 426}, "2": {"revenue": 4069.0, "count": 353}, "3": {"revenue": 2115.0, "count": 273}, "4": {"revenue": 1200.0, "count": 120}}, "2026-03-07": {"1": {"revenue": 5527.0, "count": 759}, "2": {"revenue": 7416.0, "count": 642}, "3": {"revenue": 3975.0, "count": 514}, "4": {"revenue": 2156.0, "count": 216}}, "2026-03-08": {"1": {"revenue": 5165.0, "count": 713}, "2": {"revenue": 7013.0, "count": 607}, "3": {"revenue": 3210.0, "count": 419}, "4": {"revenue": 1712.0, "count": 172}}, "2026-03-09": {"1": {"revenue": 2891.0, "count": 398}, "2": {"revenue": 4431.0, "count": 383}, "3": {"revenue": 2050.0, "count": 265}, "4": {"revenue": 1327.0, "count": 132}}, "2026-03-10": {"1": {"revenue": 3412.0, "count": 468}, "2": {"revenue": 4780.0, "count": 415}, "3": {"revenue": 1765.0, "count": 229}, "4": {"revenue": 1350.0, "count": 134}}, "2026-03-11": {"1": {"revenue": 3453.0, "count": 476}, "2": {"revenue": 4431.0, "count": 384}, "3": {"revenue": 2127.0, "count": 275}, "4": {"revenue": 1350.0, "count": 135}}, "2026-03-12": {"1": {"revenue": 3317.0, "count": 456}, "2": {"revenue": 4368.0, "count": 378}, "3": {"revenue": 1828.0, "count": 237}, "4": {"revenue": 1264.0, "count": 127}}, "2026-03-13": {"1": {"revenue": 3199.0, "count": 440}, "2": {"revenue": 4549.0, "count": 394}, "3": {"revenue": 1901.0, "count": 247}, "4": {"revenue": 1264.0, "count": 127}}, "2026-03-14": {"1": {"revenue": 5260.0, "count": 725}, "2": {"revenue": 8458.0, "count": 733}, "3": {"revenue": 3536.0, "count": 459}, "4": {"revenue": 2061.0, "count": 205}}, "2026-03-15": {"1": {"revenue": 4603.0, "count": 633}, "2": {"revenue": 7280.0, "count": 631}, "3": {"revenue": 3092.0, "count": 401}, "4": {"revenue": 1785.0, "count": 177}}, "2026-03-16": {"1": {"revenue": 3167.0, "count": 434}, "2": {"revenue": 3987.0, "count": 345}, "3": {"revenue": 1783.0, "count": 231}, "4": {"revenue": 1327.0, "count": 132}}, "2026-03-17": {"1": {"revenue": 2764.0, "count": 381}, "2": {"revenue": 4762.0, "count": 413}, "3": {"revenue": 1860.0, "count": 241}, "4": {"revenue": 1350.0, "count": 134}}, "2026-03-18": {"1": {"revenue": 3335.0, "count": 458}, "2": {"revenue": 4336.0, "count": 376}, "3": {"revenue": 1765.0, "count": 230}, "4": {"revenue": 1137.0, "count": 114}}, "2026-03-19": {"1": {"revenue": 2859.0, "count": 392}, "2": {"revenue": 4218.0, "count": 365}, "3": {"revenue": 1860.0, "count": 241}, "4": {"revenue": 1232.0, "count": 124}}, "2026-03-20": {"1": {"revenue": 3104.0, "count": 428}, "2": {"revenue": 4304.0, "count": 373}, "3": {"revenue": 1797.0, "count": 233}, "4": {"revenue": 1114.0, "count": 112}}, "2026-03-21": {"1": {"revenue": 5556.0, "count": 764}, "2": {"revenue": 7511.0, "count": 652}, "3": {"revenue": 3495.0, "count": 453}, "4": {"revenue": 1984.0, "count": 197}}, "2026-03-22": {"1": {"revenue": 4952.0, "count": 682}, "2": {"revenue": 6759.0, "count": 586}, "3": {"revenue": 3029.0, "count": 394}, "4": {"revenue": 1730.0, "count": 173}}, "2026-03-23": {"1": {"revenue": 3294.0, "count": 453}, "2": {"revenue": 4259.0, "count": 368}, "3": {"revenue": 1819.0, "count": 234}, "4": {"revenue": 1327.0, "count": 133}}, "2026-03-24": {"1": {"revenue": 3317.0, "count": 456}, "2": {"revenue": 4603.0, "count": 397}, "3": {"revenue": 1860.0, "count": 242}, "4": {"revenue": 1096.0, "count": 108}}, "2026-03-25": {"1": {"revenue": 3294.0, "count": 452}, "2": {"revenue": 4857.0, "count": 421}, "3": {"revenue": 1901.0, "count": 247}, "4": {"revenue": 1096.0, "count": 109}}, "2026-03-26": {"1": {"revenue": 3507.0, "count": 482}, "2": {"revenue": 4091.0, "count": 354}, "3": {"revenue": 2105.0, "count": 273}, "4": {"revenue": 1390.0, "count": 138}}, "2026-03-27": {"1": {"revenue": 3167.0, "count": 439}, "2": {"revenue": 4295.0, "count": 372}, "3": {"revenue": 2073.0, "count": 268}, "4": {"revenue": 1169.0, "count": 118}}, "2026-03-28": {"1": {"revenue": 5740.0, "count": 790}, "2": {"revenue": 7606.0, "count": 659}, "3": {"revenue": 3495.0, "count": 454}, "4": {"revenue": 2369.0, "count": 236}}, "2026-03-29": {"1": {"revenue": 4431.0, "count": 608}, "2": {"revenue": 6089.0, "count": 528}, "3": {"revenue": 2956.0, "count": 383}, "4": {"revenue": 1984.0, "count": 198}}, "2026-03-30": {"1": {"revenue": 2796.0, "count": 384}, "2": {"revenue": 4431.0, "count": 382}, "3": {"revenue": 1955.0, "count": 252}, "4": {"revenue": 1096.0, "count": 111}}, "2026-03-31": {"1": {"revenue": 3027.0, "count": 415}, "2": {"revenue": 4739.0, "count": 408}, "3": {"revenue": 2105.0, "count": 272}, "4": {"revenue": 1368.0, "count": 136}}}}, "membership": {"active_members": 4930, "by_location": {"1711 E. Oltorf": 1795, "Brodie Lane": 1595, "Highway 183": 1196, "Parmer Lane": 344}, "by_package": {"Basic Wash": 956, "Carnauba Wash": 1450, "Ceramic Wash": 738, "Deluxe Wash": 1786}, "mrr": 179456.7, "arr": 2153480.4, "new_this_month": 182, "cancelled_this_month": 148, "net_change": 34, "churn_rate": 2.9, "redemption_rates": {"1711 E. Oltorf": 0.53, "Brodie Lane": 0.25, "Highway 183": 0.5, "Parmer Lane": 0.35}}, "wash_mix": {"date": "2026-03-31", "counts": {"Deluxe Wash": 432, "Carnauba Wash": 370, "Basic Wash": 245, "Ceramic Wash": 184}, "percentages": {"Deluxe Wash": 35.1, "Carnauba Wash": 30.1, "Basic Wash": 19.9, "Ceramic Wash": 14.9}, "total": 1231}, "payment_mix": {"date": "2026-03-31", "counts": {"card": 656, "membership": 499, "cash": 64, "gift_card": 6, "fleet_account": 5, "void": 1}, "percentages": {"card": 53.3, "membership": 40.5, "cash": 5.2, "gift_card": 0.5, "fleet_account": 0.4, "void": 0.1}, "total": 1231}, "hourly": {"date": "2026-03-31", "locations": [{"location_id": 1, "location_name": "1711 E. Oltorf", "hours": {"8": 37, "9": 45, "10": 45, "11": 45, "12": 41, "13": 33, "14": 37, "15": 33, "16": 33, "17": 25, "18": 21, "19": 17}}, {"location_id": 2, "location_name": "Brodie Lane", "hours": {"8": 37, "9": 45, "10": 45, "11": 45, "12": 41, "13": 33, "14": 37, "15": 33, "16": 33, "17": 24, "18": 20, "19": 16}}, {"location_id": 3, "location_name": "Highway 183", "hours": {"8": 24, "9": 30, "10": 30, "11": 30, "12": 27, "13": 22, "14": 24, "15": 22, "16": 22, "17": 16, "18": 14, "19": 11}}, {"location_id": 4, "location_name": "Parmer Lane", "hours": {"8": 12, "9": 15, "10": 15, "11": 15, "12": 14, "13": 11, "14": 12, "15": 11, "16": 11, "17": 8, "18": 7, "19": 5}}], "hours": [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, "transactions": {"transactions": [{"id": 93114, "transaction_date": "2026-03-31", "transaction_time": "19:59:00", "location": "Brodie Lane", "package": "Deluxe Wash", "transaction_type": "single_wash", "payment_method": "card", "amount": 14.0, "notes": null, "employee": "Andre Davis"}, {"id": 92855, "transaction_date": "2026-03-31", "transaction_time": "19:56:00", "location": "Brodie Lane", "package": "Deluxe Wash", "transaction_type": "member_wash", "payment_method": "membership", "amount": 0.0, "notes": null, "employee": "Andre Davis"}, {"id": 93361, "transaction_date": "2026-03-31", "transaction_time": "19:55:00", "location": "Highway 183", "package": "Carnauba Wash", "transaction_type": "member_wash", "payment_method": "membership", "amount": 0.0, "notes": null, "employee": "Destiny Robinson"}, {"id": 93360, "transaction_date": "2026-03-31", "transaction_time": "19:55:00", "location": "Highway 183", "package": "Basic Wash", "transaction_type": "member_wash", "payment_method": "membership", "amount": 0.0, "notes": null, "employee": "Carlos Lopez"}, {"id": 92787, "transaction_date": "2026-03-31", "transaction_time": "19:55:00", "location": "1711 E. Oltorf", "package": "Carnauba Wash", "transaction_type": "single_wash", "payment_method": "card", "amount": 18.0, "notes": null, "employee": "Marcus Johnson"}, {"id": 93120, "transaction_date": "2026-03-31", "transaction_time": "19:54:00", "location": "Brodie Lane", "package": "Basic Wash", "transaction_type": "single_wash", "payment_method": "card", "amount": 9.0, "notes": null, "employee": "Jasmine Lee"}, {"id": 92463, "transaction_date": "2026-03-31", "transaction_time": "19:54:00", "location": "1711 E. Oltorf", "package": "Deluxe Wash", "transaction_type": "member_wash", "payment_method": "membership", "amount": 0.0, "notes": null, "employee": "Tyler Chen"}, {"id": 93503, "transaction_date": "2026-03-31", "transaction_time": "19:50:00", "location": "Highway 183", "package": "Basic Wash", "transaction_type": "single_wash", "payment_method": "card", "amount": 9.0, "notes": null, "employee": "Destiny Robinson"}, {"id": 93232, "transaction_date": "2026-03-31", "transaction_time": "19:50:00", "location": "Brodie Lane", "package": "Deluxe Wash", "transaction_type": "single_wash", "payment_method": "card", "amount": 14.0, "notes": null, "employee": "Kevin Martinez"}, {"id": 93127, "transaction_date": "2026-03-31", "transaction_time": "19:46:00", "location": "Brodie Lane", "package": "Deluxe Wash", "transaction_type": "single_wash", "payment_method": "card", "amount": 14.0, "notes": null, "employee": "Andre Davis"}, {"id": 92978, "transaction_date": "2026-03-31", "transaction_time": "19:46:00", "location": "Brodie Lane", "package": "Carnauba Wash", "transaction_type": "single_wash", "payment_method": "card", "amount": 18.0, "notes": null, "employee": "Rachel Thompson"}, {"id": 93343, "transaction_date": "2026-03-31", "transaction_time": "19:41:00", "location": "Highway 183", "package": "Deluxe Wash", "transaction_type": "member_wash", "payment_method": "membership", "amount": 0.0, "notes": null, "employee": "Carlos Lopez"}, {"id": 92916, "transaction_date": "2026-03-31", "transaction_time": "19:41:00", "location": "Brodie Lane", "package": "Basic Wash", "transaction_type": "member_wash", "payment_method": "membership", "amount": 0.0, "notes": null, "employee": "Brandon Garcia"}, {"id": 93141, "transaction_date": "2026-03-31", "transaction_time": "19:39:00", "location": "Brodie Lane", "package": "Basic Wash", "transaction_type": "single_wash", "payment_method": "card", "amount": 9.0, "notes": null, "employee": "Jasmine Lee"}, {"id": 92460, "transaction_date": "2026-03-31", "transaction_time": "19:39:00", "location": "1711 E. Oltorf", "package": "Deluxe Wash", "transaction_type": "member_wash", "payment_method": "membership", "amount": 0.0, "notes": null, "employee": "Ashley Williams"}, {"id": 93300, "transaction_date": "2026-03-31", "transaction_time": "19:37:00", "location": "Highway 183", "package": "Ceramic Wash", "transaction_type": "member_wash", "payment_method": "membership", "amount": 0.0, "notes": null, "employee": "Miguel Hernandez"}, {"id": 92964, "transaction_date": "2026-03-31", "transaction_time": "19:37:00", "location": "Brodie Lane", "package": "Carnauba Wash", "transaction_type": "single_wash", "payment_method": "card", "amount": 18.0, "notes": null, "employee": "Jasmine Lee"}, {"id": 92922, "transaction_date": "2026-03-31", "transaction_time": "19:37:00", "location": "Brodie Lane", "package": "Deluxe Wash", "transaction_type": "member_wash", "payment_method": "membership", "amount": 0.0, "notes": null, "employee": "Rachel Thompson"}, {"id": 92710, "transaction_date": "2026-03-31", "transaction_time": "19:37:00", "location": "1711 E. Oltorf", "package": "Carnauba Wash", "transaction_type": "single_wash", "payment_method": "card", "amount": 18.0, "notes": null, "employee": "Marcus Johnson"}, {"id": 92870, "transaction_date": "2026-03-31", "transaction_time": "19:36:00", "location": "Brodie Lane", "package": "Basic Wash", "transaction_type": "member_wash", "payment_method": "membership", "amount": 0.0, "notes": null, "employee": "Kevin Martinez"}]}, "alerts": {"alerts": [{"id": 49, "location": "Highway 183", "alert_type": "equipment", "alert_date": "2025-11-12", "message": "Conveyor belt sensor needs calibration"}, {"id": 30, "location": "Parmer Lane", "alert_type": "equipment", "alert_date": "2025-10-19", "message": "Dryer #3 running below optimal temperature"}, {"id": 36, "location": "1711 E. Oltorf", "alert_type": "equipment", "alert_date": "2025-10-02", "message": "Conveyor belt sensor needs calibration"}, {"id": 45, "location": "Brodie Lane", "alert_type": "equipment", "alert_date": "2025-09-13", "message": "Dryer #3 running below optimal temperature"}, {"id": 24, "location": "Parmer Lane", "alert_type": "equipment", "alert_date": "2025-07-24", "message": "Conveyor belt sensor needs calibration"}, {"id": 43, "location": "Parmer Lane", "alert_type": "equipment", "alert_date": "2025-06-06", "message": "Conveyor belt sensor needs calibration"}, {"id": 5, "location": "Brodie Lane", "alert_type": "equipment", "alert_date": "2025-05-11", "message": "Conveyor belt sensor needs calibration"}], "cash_alerts": [{"location": "Parmer Lane", "shift_type": "afternoon", "variance": 3.05, "shift_date": "2026-03-31"}, {"location": "Highway 183", "shift_type": "afternoon", "variance": -4.33, "shift_date": "2026-03-31"}, {"location": "Brodie Lane", "shift_type": "morning", "variance": 3.69, "shift_date": "2026-03-31"}, {"location": "1711 E. Oltorf", "shift_type": "afternoon", "variance": -3.11, "shift_date": "2026-03-31"}, {"location": "Parmer Lane", "shift_type": "afternoon", "variance": -4.19, "shift_date": "2026-03-30"}, {"location": "Parmer Lane", "shift_type": "morning", "variance": -4.18, "shift_date": "2026-03-30"}, {"location": "Highway 183", "shift_type": "afternoon", "variance": -3.49, "shift_date": "2026-03-30"}, {"location": "Brodie Lane", "shift_type": "afternoon", "variance": -4.19, "shift_date": "2026-03-30"}, {"location": "1711 E. Oltorf", "shift_type": "morning", "variance": 4.31, "shift_date": "2026-03-30"}, {"location": "Brodie Lane", "shift_type": "morning", "variance": -3.64, "shift_date": "2026-03-29"}]}};
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Palms Car Wash — Live Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+:root {
+  --bg: #111113;
+  --card: #1A1A1E;
+  --card-hover: #222228;
+  --border: #2A2A30;
+  --text: #E8E8EC;
+  --text-dim: #888892;
+  --accent: #4FC3F7;
+  --accent2: #81C784;
+  --red: #EF5350;
+  --orange: #FFA726;
+  --green: #66BB6A;
+  --purple: #AB47BC;
+  --yellow: #FFEE58;
+  --cyan: #26C6DA;
+  /* Palms brand-ish */
+  --palm-green: #2E7D32;
+  --palm-blue: #0277BD;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+  font-size: 14px; line-height: 1.4; overflow-x: hidden;
+}
+a { color: var(--accent); text-decoration: none; }
+
+/* ── TOP BAR ── */
+.topbar {
+  background: linear-gradient(135deg, #0D47A1, #1B5E20);
+  padding: 14px 24px; display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 100; border-bottom: 2px solid var(--palm-green);
+}
+.topbar h1 { font-size: 20px; font-weight: 700; letter-spacing: 1px; }
+.topbar h1 span { color: #81C784; }
+.topbar-stats { display: flex; gap: 28px; align-items: center; }
+.topbar-stat { text-align: center; }
+.topbar-stat .value { font-size: 22px; font-weight: 700; }
+.topbar-stat .label { font-size: 11px; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 0.5px; }
+.topbar-stat .trend { font-size: 12px; font-weight: 600; }
+.trend-up { color: var(--green); }
+.trend-down { color: var(--red); }
+.topbar-time { font-size: 12px; color: rgba(255,255,255,0.6); }
+
+/* ── VIEW TOGGLE ── */
+.view-bar {
+  background: var(--card); border-bottom: 1px solid var(--border);
+  padding: 10px 24px; display: flex; gap: 12px; align-items: center;
+}
+.view-btn {
+  background: transparent; color: var(--text-dim); border: 1px solid var(--border);
+  padding: 6px 16px; border-radius: 6px; cursor: pointer; font-size: 13px;
+  transition: all 0.2s;
+}
+.view-btn:hover { border-color: var(--accent); color: var(--accent); }
+.view-btn.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 600; }
+.view-label { color: var(--text-dim); font-size: 12px; margin-right: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* ── LAYOUT ── */
+.dashboard { padding: 16px 24px; max-width: 1600px; margin: 0 auto; }
+.row { display: grid; gap: 16px; margin-bottom: 16px; }
+.row-4 { grid-template-columns: repeat(4, 1fr); }
+.row-2 { grid-template-columns: 1fr 1fr; }
+.row-3 { grid-template-columns: 1fr 1fr 1fr; }
+.row-1 { grid-template-columns: 1fr; }
+
+/* ── CARDS ── */
+.card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 16px; transition: border-color 0.2s;
+}
+.card:hover { border-color: #444; }
+.card-title {
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px;
+  color: var(--text-dim); margin-bottom: 10px; font-weight: 600;
+}
+.card h3 { font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+
+/* ── LOCATION CARDS ── */
+.loc-card { position: relative; overflow: hidden; }
+.loc-card.selected { border-color: var(--accent); border-width: 2px; }
+.loc-card .loc-name { font-size: 15px; font-weight: 700; margin-bottom: 2px; }
+.loc-card .loc-address { font-size: 11px; color: var(--text-dim); margin-bottom: 12px; }
+.loc-status {
+  position: absolute; top: 12px; right: 12px;
+  padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 700; letter-spacing: 0.5px;
+}
+.loc-status.open { background: rgba(102,187,106,0.15); color: var(--green); }
+.loc-status.closed { background: rgba(239,83,80,0.15); color: var(--red); }
+.loc-stat-row { display: flex; gap: 16px; margin-bottom: 6px; }
+.loc-stat { flex: 1; }
+.loc-stat .val { font-size: 20px; font-weight: 700; }
+.loc-stat .lbl { font-size: 10px; color: var(--text-dim); text-transform: uppercase; }
+.loc-bar { height: 6px; border-radius: 3px; background: #333; margin-top: 8px; overflow: hidden; }
+.loc-bar-fill { height: 100%; border-radius: 3px; transition: width 0.6s ease; }
+.loc-members { font-size: 11px; color: var(--text-dim); margin-top: 6px; }
+.loc-members span { color: var(--accent); font-weight: 600; }
+.loc-trend { font-size: 12px; font-weight: 600; margin-top: 4px; }
+
+/* ── KPI BANNER ── */
+.kpi-banner { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; margin-bottom: 16px; }
+.kpi-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px; text-align: center; }
+.kpi-item .kpi-val { font-size: 24px; font-weight: 700; }
+.kpi-item .kpi-lbl { font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-dim); margin-top: 2px; }
+.kpi-item .kpi-sub { font-size: 11px; color: var(--text-dim); margin-top: 4px; }
+.kpi-highlight { color: var(--accent); }
+.kpi-green { color: var(--green); }
+.kpi-orange { color: var(--orange); }
+.kpi-red { color: var(--red); }
+.kpi-purple { color: var(--purple); }
+
+/* ── CHARTS ── */
+.chart-container { position: relative; height: 260px; }
+.chart-container canvas { max-height: 260px; }
+.chart-tall { height: 320px; }
+.chart-tall canvas { max-height: 320px; }
+
+/* ── HEATMAP ── */
+.heatmap { width: 100%; border-collapse: separate; border-spacing: 3px; }
+.heatmap th { font-size: 10px; color: var(--text-dim); text-transform: uppercase; padding: 4px 6px; text-align: center; }
+.heatmap td { text-align: center; padding: 6px 4px; border-radius: 4px; font-size: 12px; font-weight: 600; min-width: 36px; }
+.heat-0 { background: #1a1a1e; color: #555; }
+.heat-1 { background: #1a3325; color: #66BB6A; }
+.heat-2 { background: #254d2e; color: #81C784; }
+.heat-3 { background: #2E7D32; color: #fff; }
+.heat-4 { background: #388E3C; color: #fff; }
+.heat-5 { background: #43A047; color: #fff; }
+
+/* ── TABS ── */
+.tab-bar { display: flex; border-bottom: 1px solid var(--border); margin-bottom: 12px; }
+.tab {
+  padding: 8px 20px; cursor: pointer; color: var(--text-dim); font-size: 13px;
+  border-bottom: 2px solid transparent; transition: all 0.2s;
+}
+.tab:hover { color: var(--text); }
+.tab.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* ── TABLES ── */
+.data-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.data-table th {
+  text-align: left; padding: 8px; border-bottom: 1px solid var(--border);
+  color: var(--text-dim); font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px;
+}
+.data-table td { padding: 8px; border-bottom: 1px solid #222; }
+.data-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+/* ── ALERTS ── */
+.alert-item {
+  display: flex; align-items: center; gap: 10px; padding: 8px 0;
+  border-bottom: 1px solid #222; font-size: 12px;
+}
+.alert-icon { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.alert-cash { background: var(--orange); }
+.alert-equip { background: var(--red); }
+.alert-vol { background: var(--yellow); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1200px) {
+  .row-4 { grid-template-columns: repeat(2, 1fr); }
+  .kpi-banner { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 800px) {
+  .row-4, .row-3, .row-2 { grid-template-columns: 1fr; }
+  .kpi-banner { grid-template-columns: repeat(2, 1fr); }
+  .topbar { flex-direction: column; gap: 8px; }
+  .topbar-stats { flex-wrap: wrap; justify-content: center; }
+}
+
+/* ── REFRESH INDICATOR ── */
+.refresh-bar {
+  height: 2px; background: linear-gradient(90deg, var(--accent), var(--green));
+  position: fixed; top: 0; left: 0; z-index: 200; transition: width 60s linear;
+}
+</style>
+</head>
+<body>
+<div class="refresh-bar" id="refreshBar"></div>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div>
+    <h1>🌴 PALMS CAR WASH — <span>LIVE DASHBOARD</span></h1>
+    <div class="topbar-time" id="topTime"></div>
+  </div>
+  <div class="topbar-stats">
+    <div class="topbar-stat">
+      <div class="value" id="topCars">—</div>
+      <div class="label">Cars Today</div>
+      <div class="trend" id="topCarsTrend"></div>
+    </div>
+    <div class="topbar-stat">
+      <div class="value" id="topRevenue">—</div>
+      <div class="label">Wash Revenue Today</div>
+      <div class="trend" id="topRevTrend"></div>
+    </div>
+    <div class="topbar-stat">
+      <div class="value kpi-highlight" id="topMRR">—</div>
+      <div class="label">Monthly MRR</div>
+    </div>
+    <div class="topbar-stat">
+      <div class="value kpi-green" id="topMembers">—</div>
+      <div class="label">Active Members</div>
+    </div>
+  </div>
+</div>
+
+<!-- VIEW TOGGLE -->
+<div class="view-bar">
+  <span class="view-label">View:</span>
+  <button class="view-btn active" onclick="setView('all')" id="viewAll">All Locations</button>
+  <button class="view-btn" onclick="setView(1)" id="view1">1711 Oltorf</button>
+  <button class="view-btn" onclick="setView(2)" id="view2">Brodie Lane</button>
+  <button class="view-btn" onclick="setView(3)" id="view3">Highway 183</button>
+  <button class="view-btn" onclick="setView(4)" id="view4">Parmer Lane</button>
+</div>
+
+<div class="dashboard">
+
+  <!-- KPI BANNER -->
+  <div class="kpi-banner" id="kpiBanner">
+    <div class="kpi-item"><div class="kpi-val kpi-highlight" id="kpiTotalRev">—</div><div class="kpi-lbl">Total Revenue (12mo)</div><div class="kpi-sub" id="kpiTotalRevSub"></div></div>
+    <div class="kpi-item"><div class="kpi-val kpi-green" id="kpiMembRev">—</div><div class="kpi-lbl">Membership Rev (12mo)</div><div class="kpi-sub" id="kpiMembRevPct"></div></div>
+    <div class="kpi-item"><div class="kpi-val" id="kpiSingleRev">—</div><div class="kpi-lbl">Single Wash Rev (12mo)</div></div>
+    <div class="kpi-item"><div class="kpi-val kpi-orange" id="kpiAvgAll">—</div><div class="kpi-lbl">Avg Ticket (All Cars)</div><div class="kpi-sub">incl. $0 member washes</div></div>
+    <div class="kpi-item"><div class="kpi-val kpi-green" id="kpiAvgPay">—</div><div class="kpi-lbl">Avg Ticket (Paying)</div><div class="kpi-sub">single wash customers</div></div>
+    <div class="kpi-item"><div class="kpi-val kpi-purple" id="kpiVisits">—</div><div class="kpi-lbl">Visits/Member (Mo)</div><div class="kpi-sub" id="kpiRevPerMember"></div></div>
+  </div>
+
+  <!-- LOCATION CARDS -->
+  <div class="row row-4" id="locationCards"></div>
+
+  <!-- CHARTS ROW -->
+  <div class="row row-2">
+    <div class="card">
+      <div class="card-title">Daily Revenue — Last 30 Days</div>
+      <div class="chart-container chart-tall"><canvas id="revenueChart"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Membership Overview</div>
+      <div id="membershipDetails"></div>
+    </div>
+  </div>
+
+  <!-- WASH MIX + PAYMENT + HEATMAP -->
+  <div class="row row-3">
+    <div class="card">
+      <div class="card-title">Wash Mix (Today)</div>
+      <div class="chart-container"><canvas id="washMixChart"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Payment Mix (Today)</div>
+      <div class="chart-container"><canvas id="paymentChart"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Alerts</div>
+      <div id="alertsPanel" style="max-height:260px;overflow-y:auto;"></div>
+    </div>
+  </div>
+
+  <!-- HOURLY HEATMAP -->
+  <div class="row row-1">
+    <div class="card">
+      <div class="card-title">Hourly Heatmap (Today)</div>
+      <div style="overflow-x:auto;" id="heatmapContainer"></div>
+    </div>
+  </div>
+
+  <!-- BOTTOM TABS -->
+  <div class="row row-1">
+    <div class="card">
+      <div class="tab-bar">
+        <div class="tab active" onclick="switchTab(this, 'tabTxn')">Recent Transactions</div>
+        <div class="tab" onclick="switchTab(this, 'tabMember')">Membership Activity</div>
+        <div class="tab" onclick="switchTab(this, 'tabShifts')">Employee Shifts</div>
+      </div>
+      <div class="tab-content active" id="tabTxn"></div>
+      <div class="tab-content" id="tabMember"></div>
+      <div class="tab-content" id="tabShifts"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const API = '';
+let currentView = 'all'; // 'all' or location_id (1-4)
+let charts = {};
+
+function locParam() {
+  return currentView === 'all' ? '' : `&location_id=${currentView}`;
+}
+function locQuery() {
+  return currentView === 'all' ? '' : `?location_id=${currentView}`;
+}
+
+function fmt$(n) {
+  if (n >= 1000000) return '$' + (n/1000000).toFixed(2) + 'M';
+  if (n >= 1000) return '$' + (n/1000).toFixed(1) + 'K';
+  return '$' + n.toFixed(2);
+}
+function fmtN(n) {
+  return n.toLocaleString();
+}
+function trendHTML(pct) {
+  if (pct > 0) return `<span class="trend-up">▲ ${pct}%</span>`;
+  if (pct < 0) return `<span class="trend-down">▼ ${Math.abs(pct)}%</span>`;
+  return `<span style="color:var(--text-dim)">— 0%</span>`;
+}
+
+const LOC_COLORS = {
+  1: '#4FC3F7', 2: '#81C784', 3: '#FFA726', 4: '#AB47BC'
+};
+const WASH_COLORS = {
+  'Ceramic Wash': '#4FC3F7', 'Carnauba Wash': '#81C784',
+  'Deluxe Wash': '#FFA726', 'Basic Wash': '#EF5350'
+};
+const PAY_COLORS = {
+  'membership': '#AB47BC', 'card': '#4FC3F7', 'cash': '#66BB6A',
+  'fleet_account': '#FFA726', 'gift_card': '#FFEE58', 'comp': '#888', 'void': '#EF5350'
+};
+
+// ── VIEW SWITCHING ──
+function setView(v) {
+  currentView = v;
+  document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+  if (v === 'all') document.getElementById('viewAll').classList.add('active');
+  else document.getElementById('view' + v).classList.add('active');
+  loadAll();
+}
+
+// ── TAB SWITCHING ──
+function switchTab(el, id) {
+  el.parentElement.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  el.parentElement.parentElement.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+// ── LOAD ALL DATA ──
+async function loadAll() {
+  await Promise.all([
+    loadToday(), loadKPI(), loadRevenue(), loadMembership(),
+    loadWashMix(), loadPaymentMix(), loadHourly(), loadAlerts(),
+    loadTransactions(), loadMemberActivity(), loadShifts()
+  ]);
+}
+
+// ── TODAY SUMMARY ──
+async function loadToday() {
+  const r = await fetch(`${API}/api/today?location_id=${currentView === 'all' ? 0 : currentView}`);
+  const d = await r.json();
+
+  document.getElementById('topTime').textContent = `Data: ${d.date}`;
+  document.getElementById('topCars').textContent = fmtN(d.totals.today_cars);
+  document.getElementById('topRevenue').textContent = fmt$(d.totals.today_revenue);
+  document.getElementById('topCarsTrend').innerHTML = `vs yesterday: ${trendHTML(d.totals.trend_vs_yesterday)}`;
+  document.getElementById('topRevTrend').innerHTML = `vs last week: ${trendHTML(d.totals.trend_vs_last_week)}`;
+
+  // Location cards
+  const container = document.getElementById('locationCards');
+  if (currentView === 'all') {
+    container.style.display = 'grid';
+    container.innerHTML = d.locations.map(loc => {
+      const memPct = loc.today_cars ? Math.round(loc.member_count / loc.today_cars * 100) : 0;
+      const singPct = 100 - memPct;
+      return `
+        <div class="card loc-card" onclick="setView(${loc.id})" style="cursor:pointer">
+          <div class="loc-status ${loc.is_open ? 'open' : 'closed'}">${loc.is_open ? 'OPEN' : 'CLOSED'}</div>
+          <div class="loc-name">${loc.name}</div>
+          <div class="loc-address">${loc.address}</div>
+          <div class="loc-stat-row">
+            <div class="loc-stat"><div class="val">${fmtN(loc.today_cars)}</div><div class="lbl">Cars</div></div>
+            <div class="loc-stat"><div class="val">${fmt$(loc.today_revenue)}</div><div class="lbl">Revenue</div></div>
+          </div>
+          <div class="loc-bar">
+            <div class="loc-bar-fill" style="width:${memPct}%;background:linear-gradient(90deg,var(--purple),var(--accent))"></div>
+          </div>
+          <div class="loc-members">${memPct}% member | ${singPct}% single • <span>${fmtN(loc.active_members)}</span> members (${Math.round(loc.redemption_rate*100)}% redeem)</div>
+          <div class="loc-trend">vs yesterday: ${trendHTML(loc.trend_vs_yesterday)} · vs last week: ${trendHTML(loc.trend_vs_last_week)}</div>
+        </div>`;
+    }).join('');
+  } else {
+    const loc = d.locations[0];
+    if (!loc) { container.innerHTML = ''; return; }
+    const memPct = loc.today_cars ? Math.round(loc.member_count / loc.today_cars * 100) : 0;
+    container.style.display = 'grid';
+    container.className = 'row row-1';
+    container.innerHTML = `
+      <div class="card loc-card selected">
+        <div class="loc-status ${loc.is_open ? 'open' : 'closed'}">${loc.is_open ? 'OPEN' : 'CLOSED'}</div>
+        <div class="loc-name" style="font-size:20px">${loc.name}</div>
+        <div class="loc-address">${loc.address}</div>
+        <div class="loc-stat-row" style="margin-top:12px;">
+          <div class="loc-stat"><div class="val" style="font-size:28px">${fmtN(loc.today_cars)}</div><div class="lbl">Cars Today</div></div>
+          <div class="loc-stat"><div class="val" style="font-size:28px">${fmt$(loc.today_revenue)}</div><div class="lbl">Revenue Today</div></div>
+          <div class="loc-stat"><div class="val" style="font-size:28px">${fmtN(loc.active_members)}</div><div class="lbl">Active Members</div></div>
+          <div class="loc-stat"><div class="val" style="font-size:28px">${Math.round(loc.redemption_rate*100)}%</div><div class="lbl">Redemption Rate</div></div>
+        </div>
+        <div class="loc-bar" style="height:8px;margin-top:12px;">
+          <div class="loc-bar-fill" style="width:${memPct}%;background:linear-gradient(90deg,var(--purple),var(--accent))"></div>
+        </div>
+        <div class="loc-members" style="font-size:13px;margin-top:8px;">${memPct}% member washes | ${100-memPct}% single washes</div>
+        <div class="loc-trend" style="font-size:14px;">vs yesterday: ${trendHTML(loc.trend_vs_yesterday)} · vs last week: ${trendHTML(loc.trend_vs_last_week)}</div>
+      </div>`;
+    container.className = 'row row-1';
+  }
+}
+
+// ── KPI ──
+async function loadKPI() {
+  const r = await fetch(`${API}/api/kpi?location_id=${currentView === 'all' ? 0 : currentView}`);
+  const d = await r.json();
+  const a = d.annual, m = d.this_month;
+
+  document.getElementById('kpiTotalRev').textContent = fmt$(a.total_revenue);
+  document.getElementById('kpiTotalRevSub').textContent = `${fmtN(a.total_washes)} washes`;
+  document.getElementById('kpiMembRev').textContent = fmt$(a.membership_revenue);
+  document.getElementById('kpiMembRevPct').textContent = `${a.membership_pct}% of total revenue`;
+  document.getElementById('kpiSingleRev').textContent = fmt$(a.single_revenue);
+  document.getElementById('kpiAvgAll').textContent = '$' + m.avg_ticket_all.toFixed(2);
+  document.getElementById('kpiAvgPay').textContent = '$' + m.avg_ticket_paying.toFixed(2);
+  document.getElementById('kpiVisits').textContent = m.visits_per_member.toFixed(1);
+  document.getElementById('kpiRevPerMember').textContent = `$${m.revenue_per_member.toFixed(2)}/member/mo`;
+  document.getElementById('topMRR').textContent = fmt$(m.mrr);
+  document.getElementById('topMembers').textContent = fmtN(m.active_members);
+}
+
+// ── REVENUE CHART ──
+async function loadRevenue() {
+  const r = await fetch(`${API}/api/revenue/daily?days=30&location_id=${currentView === 'all' ? 0 : currentView}`);
+  const d = await r.json();
+  const labels = d.dates.map(dt => { const p = dt.split('-'); return `${p[1]}/${p[2]}`; });
+
+  if (currentView === 'all') {
+    const datasets = Object.entries(d.locations).map(([lid, name]) => ({
+      label: name,
+      data: d.dates.map(dt => (d.data[dt]?.[parseInt(lid)]?.revenue) || 0),
+      backgroundColor: LOC_COLORS[parseInt(lid)] + '99',
+      borderColor: LOC_COLORS[parseInt(lid)],
+      borderWidth: 1,
+    }));
+    renderChart('revenueChart', 'bar', labels, datasets, {stacked: true, yPrefix: '$'});
+  } else {
+    const lid = parseInt(currentView);
+    const dataset = [{
+      label: d.locations[lid],
+      data: d.dates.map(dt => (d.data[dt]?.[lid]?.revenue) || 0),
+      backgroundColor: LOC_COLORS[lid] + '99',
+      borderColor: LOC_COLORS[lid],
+      borderWidth: 1,
+    }];
+    renderChart('revenueChart', 'bar', labels, dataset, {stacked: false, yPrefix: '$'});
+  }
+}
+
+// ── MEMBERSHIP ──
+async function loadMembership() {
+  const r = await fetch(`${API}/api/membership?location_id=${currentView === 'all' ? 0 : currentView}`);
+  const d = await r.json();
+
+  let html = `
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
+      <div style="text-align:center;padding:12px;background:#222;border-radius:8px;">
+        <div style="font-size:28px;font-weight:700;color:var(--accent)">${fmtN(d.active_members)}</div>
+        <div style="font-size:11px;color:var(--text-dim);text-transform:uppercase">Active Members</div>
+      </div>
+      <div style="text-align:center;padding:12px;background:#222;border-radius:8px;">
+        <div style="font-size:28px;font-weight:700;color:var(--green)">${fmt$(d.mrr)}</div>
+        <div style="font-size:11px;color:var(--text-dim);text-transform:uppercase">Monthly MRR</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px;">
+      <div style="text-align:center;padding:8px;background:#1a3325;border-radius:6px;">
+        <div style="font-size:18px;font-weight:700;color:var(--green)">+${d.new_this_month}</div>
+        <div style="font-size:10px;color:var(--text-dim)">NEW</div>
+      </div>
+      <div style="text-align:center;padding:8px;background:#331a1a;border-radius:6px;">
+        <div style="font-size:18px;font-weight:700;color:var(--red)">-${d.cancelled_this_month}</div>
+        <div style="font-size:10px;color:var(--text-dim)">CANCELLED</div>
+      </div>
+      <div style="text-align:center;padding:8px;background:#222;border-radius:6px;">
+        <div style="font-size:18px;font-weight:700;color:${d.net_change >= 0 ? 'var(--green)' : 'var(--red)'}">
+          ${d.net_change >= 0 ? '+' : ''}${d.net_change}</div>
+        <div style="font-size:10px;color:var(--text-dim)">NET / ${d.churn_rate}% CHURN</div>
+      </div>
+    </div>`;
+
+  if (currentView === 'all') {
+    html += `<div style="font-size:12px;"><strong>By Location:</strong></div>`;
+    for (const [name, cnt] of Object.entries(d.by_location)) {
+      const rate = d.redemption_rates[name] || 0;
+      html += `<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #222;font-size:12px;">
+        <span>${name}</span>
+        <span><strong>${fmtN(cnt)}</strong> members · ${Math.round(rate*100)}% redeem</span>
+      </div>`;
+    }
+  }
+
+  html += `<div style="font-size:12px;margin-top:10px;"><strong>By Plan:</strong></div>`;
+  for (const [name, cnt] of Object.entries(d.by_package)) {
+    const pct = d.active_members ? Math.round(cnt / d.active_members * 100) : 0;
+    html += `<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #222;font-size:12px;">
+      <span style="color:${WASH_COLORS[name] || '#fff'}">${name}</span>
+      <span>${fmtN(cnt)} (${pct}%)</span>
+    </div>`;
+  }
+
+  html += `<div style="margin-top:10px;padding:10px;background:#1a1a30;border-radius:6px;font-size:12px;">
+    <strong style="color:var(--accent)">ARR:</strong> ${fmt$(d.arr)}
+    <span style="color:var(--text-dim);margin-left:12px;">Membership drives ${((d.mrr * 12 / (d.mrr * 12 + 1)) * 100).toFixed(0)}%+ of revenue</span>
+  </div>`;
+
+  document.getElementById('membershipDetails').innerHTML = html;
+}
+
+// ── WASH MIX ──
+async function loadWashMix() {
+  const r = await fetch(`${API}/api/wash_mix?location_id=${currentView === 'all' ? 0 : currentView}`);
+  const d = await r.json();
+  const labels = Object.keys(d.counts);
+  const data = Object.values(d.counts);
+  const colors = labels.map(l => WASH_COLORS[l] || '#888');
+  renderChart('washMixChart', 'doughnut', labels, [{data, backgroundColor: colors, borderWidth: 0}], {});
+}
+
+// ── PAYMENT MIX ──
+async function loadPaymentMix() {
+  const r = await fetch(`${API}/api/payment_mix?location_id=${currentView === 'all' ? 0 : currentView}`);
+  const d = await r.json();
+  const labels = Object.keys(d.counts);
+  const data = Object.values(d.counts);
+  const colors = labels.map(l => PAY_COLORS[l] || '#888');
+  renderChart('paymentChart', 'doughnut', labels, [{data, backgroundColor: colors, borderWidth: 0}], {});
+}
+
+// ── HOURLY HEATMAP ──
+async function loadHourly() {
+  const r = await fetch(`${API}/api/hourly?location_id=${currentView === 'all' ? 0 : currentView}`);
+  const d = await r.json();
+  if (!d.locations.length) { document.getElementById('heatmapContainer').innerHTML = '<p>No data</p>'; return; }
+
+  // Find max for heat scaling
+  let maxVal = 0;
+  d.locations.forEach(loc => {
+    Object.values(loc.hours).forEach(v => { if (v > maxVal) maxVal = v; });
+  });
+
+  let html = '<table class="heatmap"><thead><tr><th></th>';
+  d.hours.forEach(h => { html += `<th>${h > 12 ? (h-12)+'P' : (h === 12 ? '12P' : h+'A')}</th>`; });
+  html += '</tr></thead><tbody>';
+
+  d.locations.forEach(loc => {
+    html += `<tr><th style="text-align:left;white-space:nowrap;font-size:11px;">${loc.location_name}</th>`;
+    d.hours.forEach(h => {
+      const v = loc.hours[h] || 0;
+      const level = maxVal > 0 ? Math.min(5, Math.round(v / maxVal * 5)) : 0;
+      html += `<td class="heat-${level}" title="${loc.location_name} ${h}:00 — ${v} cars">${v}</td>`;
+    });
+    html += '</tr>';
+  });
+  html += '</tbody></table>';
+  document.getElementById('heatmapContainer').innerHTML = html;
+}
+
+// ── ALERTS ──
+async function loadAlerts() {
+  const r = await fetch(`${API}/api/alerts?location_id=${currentView === 'all' ? 0 : currentView}`);
+  const d = await r.json();
+  let html = '';
+
+  d.cash_alerts.forEach(a => {
+    const dir = a.variance > 0 ? 'OVER' : 'SHORT';
+    html += `<div class="alert-item"><div class="alert-icon alert-cash"></div>
+      <span><strong>${a.location}</strong> ${a.shift_type} ${a.shift_date} — $${Math.abs(a.variance).toFixed(2)} ${dir}</span></div>`;
+  });
+  d.alerts.forEach(a => {
+    const cls = a.alert_type === 'equipment' ? 'alert-equip' : (a.alert_type === 'low_volume' ? 'alert-vol' : 'alert-cash');
+    html += `<div class="alert-item"><div class="alert-icon ${cls}"></div>
+      <span><strong>${a.location}</strong> — ${a.message} (${a.alert_date})</span></div>`;
+  });
+  if (!html) html = '<div style="color:var(--text-dim);padding:20px;text-align:center;">✅ No active alerts</div>';
+  document.getElementById('alertsPanel').innerHTML = html;
+}
+
+// ── TRANSACTIONS ──
+async function loadTransactions() {
+  const r = await fetch(`${API}/api/transactions?limit=25&location_id=${currentView === 'all' ? 0 : currentView}`);
+  const d = await r.json();
+  let html = '<table class="data-table"><thead><tr><th>Date</th><th>Time</th><th>Location</th><th>Package</th><th>Type</th><th>Payment</th><th>Amount</th></tr></thead><tbody>';
+  d.transactions.forEach(t => {
+    const amtColor = t.amount === 0 ? 'var(--text-dim)' : (t.amount < 0 ? 'var(--red)' : 'var(--green)');
+    html += `<tr><td>${t.transaction_date}</td><td>${t.transaction_time?.substring(0,5)}</td><td>${t.location}</td>
+      <td style="color:${WASH_COLORS[t.package]||'#fff'}">${t.package}</td>
+      <td>${t.transaction_type}</td><td>${t.payment_method}</td>
+      <td style="color:${amtColor};font-weight:600">$${t.amount.toFixed(2)}</td></tr>`;
+  });
+  html += '</tbody></table>';
+  document.getElementById('tabTxn').innerHTML = html;
+}
+
+// ── MEMBERSHIP ACTIVITY ──
+async function loadMemberActivity() {
+  const r = await fetch(`${API}/api/membership/activity?limit=25&location_id=${currentView === 'all' ? 0 : currentView}`);
+  const d = await r.json();
+  let html = '<table class="data-table"><thead><tr><th>Date</th><th>Event</th><th>Member</th><th>Location</th><th>Package</th></tr></thead><tbody>';
+  d.events.forEach(e => {
+    const color = e.event_type === 'signup' ? 'var(--green)' : 'var(--red)';
+    html += `<tr><td>${e.event_date}</td><td style="color:${color};font-weight:600">${e.event_type.toUpperCase()}</td>
+      <td>${e.member_number}</td><td>${e.location}</td><td>${e.package || '—'}</td></tr>`;
+  });
+  html += '</tbody></table>';
+  document.getElementById('tabMember').innerHTML = html;
+}
+
+// ── SHIFTS ──
+async function loadShifts() {
+  const r = await fetch(`${API}/api/shifts?location_id=${currentView === 'all' ? 0 : currentView}`);
+  const d = await r.json();
+  let html = `<div style="font-size:12px;color:var(--text-dim);margin-bottom:8px;">Shifts for ${d.date}</div>`;
+  html += '<table class="data-table"><thead><tr><th>Location</th><th>Employee</th><th>Role</th><th>Shift</th><th>Time</th></tr></thead><tbody>';
+  d.shifts.forEach(s => {
+    html += `<tr><td>${s.location}</td><td>${s.employee}</td><td>${s.role}</td>
+      <td>${s.shift_type}</td><td>${s.start_time}–${s.end_time}</td></tr>`;
+  });
+  html += '</tbody></table>';
+  document.getElementById('tabShifts').innerHTML = html;
+}
+
+// ── CHART HELPER ──
+function renderChart(canvasId, type, labels, datasets, opts) {
+  if (charts[canvasId]) charts[canvasId].destroy();
+  const ctx = document.getElementById(canvasId).getContext('2d');
+  const config = {
+    type,
+    data: { labels, datasets },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: type === 'doughnut' || datasets.length > 1,
+          position: type === 'doughnut' ? 'right' : 'top',
+          labels: { color: '#aaa', font: { size: 11 }, boxWidth: 12, padding: 8 }
+        },
+        tooltip: {
+          callbacks: {
+            label: function(ctx) {
+              let v = ctx.raw;
+              if (opts.yPrefix === '$') return `${ctx.dataset.label}: $${v.toLocaleString()}`;
+              return `${ctx.label}: ${v.toLocaleString()}`;
+            }
+          }
+        }
+      },
+    }
+  };
+
+  if (type === 'bar') {
+    config.options.scales = {
+      x: { stacked: !!opts.stacked, grid: { color: '#222' }, ticks: { color: '#888', font: { size: 10 } } },
+      y: {
+        stacked: !!opts.stacked, grid: { color: '#222' },
+        ticks: { color: '#888', font: { size: 10 },
+          callback: v => opts.yPrefix === '$' ? '$' + (v >= 1000 ? (v/1000).toFixed(0) + 'K' : v) : v
+        }
+      }
+    };
+  }
+
+  if (type === 'doughnut') {
+    config.options.cutout = '65%';
+    config.options.plugins.legend.position = 'right';
+  }
+
+  charts[canvasId] = new Chart(ctx, config);
+}
+
+// ── REFRESH BAR ──
+function startRefreshBar() {
+  const bar = document.getElementById('refreshBar');
+  bar.style.width = '100%';
+  bar.style.transition = 'none';
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      bar.style.transition = 'width 60s linear';
+      bar.style.width = '0%';
+    });
+  });
+}
+
+// ── INIT ──
+loadAll();
+startRefreshBar();
+setInterval(() => { loadAll(); startRefreshBar(); }, 60000);
+
+// Update time display
+setInterval(() => {
+  const now = new Date();
+  const ts = now.toLocaleString('en-US', {
+    weekday: 'short', month: 'short', day: 'numeric', year: 'numeric',
+    hour: '2-digit', minute: '2-digit', second: '2-digit'
+  });
+  const existing = document.getElementById('topTime').textContent;
+  const dataDate = existing.includes('Data:') ? existing : '';
+  document.getElementById('topTime').textContent = `${ts} ${dataDate ? '| ' + dataDate : ''}`;
+}, 1000);
+</script>
+</body>
+</html>
